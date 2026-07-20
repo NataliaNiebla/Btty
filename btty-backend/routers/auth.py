@@ -1,88 +1,119 @@
 from fastapi import APIRouter, Depends, HTTPException, status, Response, Request
-from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
+from fastapi.security import OAuth2PasswordRequestForm
+from pydantic import BaseModel, EmailStr
+
 from database import get_db
 from models.auth import User
-from auth_utils import hash_password, verify_password, create_access_token, create_refresh_token, decode_token
-from pydantic import BaseModel, EmailStr
+from auth_utils import verify_password, hash_password, create_access_token, decode_token
+from logger_config import logger
+from dependencies import get_current_user
 
 router = APIRouter(prefix="/auth", tags=["Auth"])
 
-# Esquema de validación para registro de usuario (pydantic - REQ-AUTH-01)
-class UserCreate(BaseModel):
+# Este es un diccionario para llevar el conteo de intentos fallidos por correo electrónico
+# Estructura: {"correo@ejemplo.com": numero_de_intentos}
+failed_attempts_counter = {}  
+
+# Esquema Pydantic para el registro de usuario
+class UserRegister(BaseModel):
     email: EmailStr
     password: str
-    role_id: int
-    
-# Endpoint temporal para registrar un nuevo usuario (REQ-AUTH-01)
-@router.post("/register", status_code=status.HTTP_201_CREATED)
-def register_user(user_in: UserCreate, db: Session = Depends(get_db)):
-    # 1. Verificar si el usuario ya existe
-    exists = db.query(User).filter(User.email == user_in.email).first()
-    if exists:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, 
-            detail="El correo electrónico ya está en uso.")
+    role_id: int | None = None
 
-    # 2. Crear el nuevo usuario con contraseña hasheada y rol asignado
+# Endpoint - registro de usuario
+@router.post("/register", status_code=status.HTTP_201_CREATED)
+def register(user_data: UserRegister, db: Session = Depends(get_db)):
+    # Verificar si el usuario ya existe
+    existing_user = db.query(User).filter(User.email == user_data.email).first()
+    if existing_user:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="El correo ya está registrado"
+        )
+    
+    # Hashear contraseña y crear nuevo usuario
+    hashed_pwd = hash_password(user_data.password)
     new_user = User(
-        email=user_in.email,
-        hashed_password=hash_password(user_in.password),
-        role_id=user_in.role_id,
-        is_2fa_enabled=False,  # Por defecto, 2FA deshabilitado
+        email=user_data.email,
+        hashed_password=hashed_pwd,
+        role_id=user_data.role_id
     )
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
-    return new_user
+    
+    return {"message": "Usuario creado con éxito. Ya puedes iniciar sesión."}
 
+# Endpoint - inicio de sesión
 @router.post("/login")
-def login(response: Response, form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
-    # 1. Verificar si el usuario existe
-    user = db.query(User).filter(User.email == form_data.username).first()
-    if not user or not verify_password(form_data.password, user.hashed_password):
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED, 
-            detail="Correo o contraseña incorrectos."
+def login(
+    request: Request, 
+    response: Response, 
+    form_data: OAuth2PasswordRequestForm = Depends(), 
+    db: Session = Depends(get_db)):
+    client_ip = request.client.host
+    username = form_data.username
+
+    user = db.query(User).filter(User.email == username).first()
+
+    # Si el usuario no existe, o la contraseña es incorrecta, incrementamos el contador de intentos fallidos
+    if not user:
+        # Incrementar contador para este correo
+        failed_attempts_counter[username] = failed_attempts_counter.get(username, 0) + 1
+        attempts = failed_attempts_counter[username]
+        reason = "Usuario no registrado"
+        
+        logger.warning(
+            f"INTENTO FALLIDO - Usuario: {username} | "
+            f"Motivo: {reason} | "
+            f"Intentos acumulados: {attempts} | "
+            f"IP: {client_ip}"
         )
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Credenciales incorrectas"
+        )
+
+    if not verify_password(form_data.password, user.hashed_password):
+        # Incrementar contador para este usuario
+        failed_attempts_counter[username] = failed_attempts_counter.get(username, 0) + 1
+        attempts = failed_attempts_counter[username]
+        reason = "Contraseña incorrecta"
+        
+        logger.warning(
+            f"INTENTO FALLIDO - Usuario: {username} | "
+            f"Motivo: {reason} | "
+            f"Intentos acumulados: {attempts} | "
+            f"IP: {client_ip}"
+        )
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Credenciales incorrectas"
+        )
+
+    # Si el inicio de sesión es exitoso, reiniciar el contador de intentos
+    failed_attempts_counter[username] = 0
     
-    # 2. Generar la data del token
-    token_data = {"sub": user.email, "role_id": user.role_id}
-    access_token = create_access_token(data=token_data)
-    refresh_token = create_refresh_token(data=token_data)
+    logger.info(f"LOGIN EXITOSO - Usuario: {user.email} (ID: {user.id}) | IP: {client_ip}")
     
-    # 3. Guardar el Refresh Token en una Cookie HttpOnly y Secure (Protección XSS)
-    response.set_cookie(
-        key="refresh_token",
-        value=refresh_token,
-        httponly=True,
-        secure=True,  # Cambiar a False solo si estás probando en HTTP sin SSL local
-        samesite="lax",
-        max_age=7 * 24 * 60 * 60  # 7 días
-    )
-    
-    # El Access Token va directo al frontend en el cuerpo de la respuesta
+    access_token = create_access_token(data={"sub": user.email})
     return {"access_token": access_token, "token_type": "bearer"}
 
-@router.post("/refresh")
-def refresh_session(request: Request, db: Session = Depends(get_db)):
-    refresh_token = request.cookies.get("refresh_token")
-    if not refresh_token:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="No hay token de sesión activo.")
-    
-    payload = decode_token(refresh_token, expected_type="refresh")
-    email = payload.get("sub")
-    
-    user = db.query(User).filter(User.email == email).first()
-    if not user:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Usuario no válido.")
-    
-    # Emitir un Access Token nuevo por otros 15 minutos
-    new_access_token = create_access_token(data={"sub": user.email, "role_id": user.role_id})
-    return {"access_token": new_access_token, "token_type": "bearer"}
-
+# Endpoint - cierre de sesión
 @router.post("/logout")
-def logout(response: Response):
-    # Revocamos la sesión borrando la cookie HttpOnly
-    response.delete_cookie(key="refresh_token", httponly=True, secure=True, samesite="lax")
-    return {"detail": "Sesión cerrada de manera segura."}
+def logout(request: Request, response: Response, current_user: str = Depends(get_current_user)):
+    client_ip = request.client.host
+    response.delete_cookie("access_token")
+    
+    # REGISTRO: Cierre de Sesión
+    logger.info(f"LOGOUT EXITOSO - Usuario: {current_user} desde IP: {client_ip}")
+    return {"message": "Sesión cerrada correctamente"}
+
+# Endpoint - ruta protegida 
+@router.get("/protected-route")
+def protected_route(request: Request, current_user: str = Depends(get_current_user)):
+    client_ip = request.client.host
+    # REGISTRO: Acceso concedido a ruta restringida
+    logger.info(f"ACCESO RESTRINGIDO PERMITIDO - Usuario: {current_user} accedió a {request.url.path} desde IP: {client_ip}")
+    return {"message": f"Bienvenido {current_user}, esta es una ruta protegida."}

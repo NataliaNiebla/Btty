@@ -24,4 +24,4 @@ class Appointment(Base):
     google_event_id = Column(String, nullable=True)
     meet_link = Column(String, nullable=True)
     
-    patient = relationship("Paciente", back_populates="appointments")
+    patient = relationship("Patient", back_populates="appointments")

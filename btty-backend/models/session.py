@@ -28,4 +28,4 @@ class SessionNote(Base):
     is_finalized = Column(Boolean, default=False) # Para bloquear edición tras 48hrs
     
     # Relaciones
-    patient = relationship("Patient", back_populates="session_notes")
+    patient = relationship("Patient", backref="session_notes")
