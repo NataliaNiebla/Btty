@@ -25,13 +25,16 @@ class UserUpdate(BaseModel):
     email: EmailStr | None = None
     role_id: int | None = None
 
-# Endpoint - registro de usuario
+# Endpoint - Registro de usuario
 @router.post("/register", status_code=status.HTTP_201_CREATED)
 def register(user_data: UserRegister, db: Session = Depends(get_db)):
+    logger.debug(f"Procesando intento de registro para: {user_data.email}")
     # Verificar si el usuario ya existe
     existing_user = db.query(User).filter(User.email == user_data.email).first()
     if existing_user:
         logger.warning(f"INTENTO DE REGISTRO FALLIDO - Correo ya registrado: {user_data.email}")
+    # if existing_user:
+    #     logger.error(f"ERROR DE REGISTRO - Correo ya registrado: {user_data.email}") # Cambiar de warning a error
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="El correo ya está registrado"
@@ -182,49 +185,21 @@ def login(
             detail="Credenciales incorrectas"
         )
 
-    # CASO ÉXITO
+    # Login exitoso: reiniciar contador de intentos fallidos
     failed_attempts_counter[username] = 0
     access_token = create_access_token(data={"sub": user.email})
+    
     safe_token = sanitize_sensitive_data(access_token)
+    safe_cookie = f"access_token={safe_token}; HttpOnly; Secure"
     
     logger.info(
         f"LOGIN EXITOSO - Usuario: {user.email} (ID: {user.id}) | "
-        f"Token: {safe_token} | IP: {client_ip}"
+        f"Token: {safe_token} | Cookie: {safe_cookie} | IP: {client_ip}"
     )
     
     db_log_event(
         db=db,
         action="LOGIN_EXITOSO",
-        user_id=user.id,
-        resource_id=f"Inicio de sesión exitoso. Token enmascarado: {safe_token}",
-        ip_address=client_ip,
-        user_agent=user_agent_str
-    )
-
-    return {"access_token": access_token, "token_type": "bearer"}
-   
-    # COMPARACIÓN DE LOGS PARA TOKENS Y COOKIES
-    raw_cookie = f"access_token={access_token}; HttpOnly; Secure"
-    
-    # LOG INSEGURO (EXPONE TOKEN Y COOKIE COMPLETA)
-    # logger.info(
-    #     f"[INSEGURO] LOGIN EXITOSO - Usuario: {user.email} | "
-    #     f"Token: {access_token} | Cookie: {raw_cookie}"
-    # )
-    
-    # LOG SEGURO (ENMASCARA TOKEN Y COOKIE)
-    safe_token = sanitize_sensitive_data(access_token)
-    safe_cookie = f"access_token={sanitize_sensitive_data(access_token)}; HttpOnly; Secure"
-    
-    logger.info(
-        f"[SEGURO] LOGIN EXITOSO - Usuario: {user.email} | "
-        f"Token: {safe_token} | Cookie: {safe_cookie}"
-    )
-    
-    # Persistencia en la base de datos para auditoría
-    db_log_event(
-        db=db,
-        action="[INFO] LOGIN_EXITOSO",
         user_id=user.id,
         resource_id=f"Inicio de sesión exitoso. Token enmascarado: {safe_token}",
         ip_address=client_ip,
@@ -260,7 +235,7 @@ def logout(
     
     return {"message": "Sesión cerrada correctamente"}
 
-# Endpoint - ruta protegida 
+# Endpoint - Ruta protegida 
 @router.get("/protected-route")
 def protected_route(
     request: Request, 

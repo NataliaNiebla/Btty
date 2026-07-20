@@ -1,0 +1,48 @@
+2026-07-20 09:44:18 - [DEBUG] - Iniciando flujo de autenticación para usuario: admin@btty.com desde IP: 127.0.0.1
+2026-07-20 09:44:19 - [INFO] - LOGIN EXITOSO - Usuario: admin@btty.com (ID: 4) | Token: eyJh...[ENMASCARADO]...rKTw | Cookie: access_token=eyJh...[ENMASCARADO]...rKTw; HttpOnly; Secure | IP: 127.0.0.1
+2026-07-20 09:45:25 - [DEBUG] - Iniciando flujo de autenticación para usuario: test@btty.com desde IP: 127.0.0.1
+2026-07-20 09:45:25 - [WARNING] - LOGIN FALLIDO - Usuario: test@btty.com | Clave enviada: Pass...[ENMASCARADO]...123! | Intentos acumulados: 1 | IP: 127.0.0.1
+2026-07-20 09:46:02 - [DEBUG] - Iniciando flujo de autenticación para usuario: test@btty.com desde IP: 127.0.0.1
+2026-07-20 09:46:02 - [WARNING] - LOGIN FALLIDO - Usuario: test@btty.com | Clave enviada: Pass...[ENMASCARADO]...123! | Intentos acumulados: 2 | IP: 127.0.0.1
+
+
+2026-07-20 09:49:41 - [DEBUG] - Iniciando flujo de autenticación para usuario: test@btty.com desde IP: 127.0.0.1
+2026-07-20 09:49:41 - [WARNING] - LOGIN FALLIDO - Usuario: test@btty.com | Clave enviada: Pass...[ENMASCARADO]...123! | Intentos acumulados: 3 | IP: 127.0.0.1
+2026-07-20 09:50:39 - [DEBUG] - Iniciando flujo de autenticación para usuario: test@btty.com desde IP: 127.0.0.1
+2026-07-20 09:50:39 - [WARNING] - LOGIN FALLIDO - Usuario: test@btty.com | Clave enviada: Pass...[ENMASCARADO]...123! | Intentos acumulados: 4 | IP: 127.0.0.1
+2026-07-20 09:50:58 - [DEBUG] - Iniciando flujo de autenticación para usuario: paciente@btty.com desde IP: 127.0.0.1
+2026-07-20 09:50:58 - [INFO] - LOGIN EXITOSO - Usuario: paciente@btty.com (ID: 2) | Token: eyJh...[ENMASCARADO]...uo0E | Cookie: access_token=eyJh...[ENMASCARADO]...uo0E; HttpOnly; Secure | IP: 127.0.0.1
+2026-07-20 09:52:18 - [WARNING] - ACCESO RESTRINGIDO DENEGADO - Intento sin token desde IP: 127.0.0.1 en ruta: /auth/protected-route
+2026-07-20 09:55:56 - [DEBUG] - Iniciando flujo de autenticación para usuario: paciente@btty.com desde IP: 127.0.0.1
+2026-07-20 09:55:57 - [INFO] - LOGIN EXITOSO - Usuario: paciente@btty.com (ID: 2) | Token: eyJh...[ENMASCARADO]...DgYM | Cookie: access_token=eyJh...[ENMASCARADO]...DgYM; HttpOnly; Secure | IP: 127.0.0.1
+2026-07-20 09:56:01 - [DEBUG] - Verificando token y credenciales para acceso a /auth/protected-route
+2026-07-20 09:56:01 - [INFO] - ACCESO PERMITIDO - Usuario: paciente@btty.com accedió a /auth/protected-route desde IP: 127.0.0.1
+2026-07-20 09:58:49 - [DEBUG] - Evaluando payload de actualización para: paciente@btty.com
+2026-07-20 09:58:49 - [INFO] - AUDITORÍA CAMBIO PERFIL - Usuario: paciente@btty.com | Campo: email | Valor Anterior: 'paciente@btty.com' | Valor Nuevo: 'pacienteUpdate@btty.com' | IP: 127.0.0.1
+2026-07-20 10:01:36 - [DEBUG] - Procesando intento de registro para: psicologo@btty.com
+2026-07-20 10:01:36 - [WARNING] - INTENTO DE REGISTRO FALLIDO - Correo ya registrado: psicologo@btty.com
+2026-07-20 10:02:34 - [DEBUG] - Iniciando flujo de autenticación para usuario: psicologo2@btty.com desde IP: 127.0.0.1
+2026-07-20 10:02:35 - [INFO] - LOGIN EXITOSO - Usuario: psicologo2@btty.com (ID: 5) | Token: eyJh...[ENMASCARADO]...EpZA | Cookie: access_token=eyJh...[ENMASCARADO]...EpZA; HttpOnly; Secure | IP: 127.0.0.1
+2026-07-20 10:03:01 - [DEBUG] - Iniciando flujo de autenticación para usuario: psicologo2@btty.com desde IP: 127.0.0.1
+2026-07-20 10:03:02 - [WARNING] - LOGIN FALLIDO - Usuario: psicologo2@btty.com | Clave enviada: Pass...[ENMASCARADO]...3!dw | Intentos acumulados: 1 | IP: 127.0.0.1
+2026-07-20 10:03:22 - [INFO] - LOGOUT EXITOSO - Usuario: paciente@btty.com desde IP: 127.0.0.1
+2026-07-20 10:04:37 - [DEBUG] - Evaluando payload de actualización para: paciente@btty.com
+2026-07-20 10:04:37 - [WARNING] - Intento de actualización sobre usuario inexistente: paciente@btty.com
+2026-07-20 10:05:40 - [DEBUG] - Iniciando flujo de autenticación para usuario: admin@btty.com desde IP: 127.0.0.1
+2026-07-20 10:05:40 - [INFO] - LOGIN EXITOSO - Usuario: admin@btty.com (ID: 4) | Token: eyJh...[ENMASCARADO]...282M | Cookie: access_token=eyJh...[ENMASCARADO]...282M; HttpOnly; Secure | IP: 127.0.0.1
+2026-07-20 10:06:03 - [DEBUG] - Evaluando payload de actualización para: admin@btty.com
+2026-07-20 10:06:03 - [INFO] - AUDITORÍA CAMBIO PERFIL - Usuario: admin@btty.com | Campo: role_id | Valor Anterior: '1' | Valor Nuevo: '3' | IP: 127.0.0.1
+2026-07-20 10:08:19 - [DEBUG] - Iniciando flujo de autenticación para usuario: psicologo2@btty.com desde IP: 127.0.0.1
+2026-07-20 10:08:20 - [WARNING] - LOGIN FALLIDO - Usuario: psicologo2@btty.com | Clave enviada: Pass...[ENMASCARADO]...wedw | Intentos acumulados: 2 | IP: 127.0.0.1
+2026-07-20 10:09:24 - [DEBUG] - Procesando intento de registro para: psicologo@btty.com
+2026-07-20 10:09:24 - [WARNING] - INTENTO DE REGISTRO FALLIDO - Correo ya registrado: psicologo@btty.com
+2026-07-20 10:10:20 - [DEBUG] - Evaluando payload de actualización para: admin@btty.com
+2026-07-20 10:10:20 - [INFO] - AUDITORÍA CAMBIO PERFIL - Usuario: admin@btty.com | Campo: role_id | Valor Anterior: '3' | Valor Nuevo: '1' | IP: 127.0.0.1
+2026-07-20 10:10:29 - [INFO] - [ACCESO PERMITIDO] Área de Pacientes accesada por: admin@btty.com
+2026-07-20 10:11:27 - [DEBUG] - Procesando intento de registro para: pacienteTestLogs@btty.com
+2026-07-20 10:11:28 - [INFO] - USUARIO REGISTRADO - ID: 6 | Email: pacienteTestLogs@btty.com
+2026-07-20 10:11:56 - [DEBUG] - Iniciando flujo de autenticación para usuario: pacienteTestLogs@btty.com desde IP: 127.0.0.1
+2026-07-20 10:11:57 - [INFO] - LOGIN EXITOSO - Usuario: pacienteTestLogs@btty.com (ID: 6) | Token: eyJh...[ENMASCARADO]...4LMw | Cookie: access_token=eyJh...[ENMASCARADO]...4LMw; HttpOnly; Secure | IP: 127.0.0.1
+2026-07-20 10:12:07 - [WARNING] - [ACCESO NO AUTORIZADO] Usuario: pacienteTestLogs@btty.com | Rol Actual: Paciente (ID: 3) | Roles Requeridos: ['Administrador'] | Ruta Solicitada: /auth/admin-dashboard | IP: 127.0.0.1
+2026-07-20 11:18:55 - [DEBUG] - Procesando intento de registro para: pacienteTestLogs@btty.com
+2026-07-20 11:18:55 - [ERROR] - ERROR DE REGISTRO - Correo ya registrado: pacienteTestLogs@btty.com

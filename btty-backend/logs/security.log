@@ -8,3 +8,4 @@
 
 [2026-07-20 01:22:44] INFO - LOGIN EXITOSO - Usuario: admin@btty.com (ID: 4) | Token: eyJh...[ENMASCARADO]...z2_w | IP: 127.0.0.1
 [2026-07-20 01:26:22] WARNING - LOGIN FALLIDO - Usuario: test@btty.com | Clave enviada: sdjn...[ENMASCARADO]...iofn | Intentos acumulados: 1 | IP: 127.0.0.1
+
