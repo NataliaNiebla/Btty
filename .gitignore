@@ -1,0 +1,18 @@
+# Entornos virtuales
+venv/
+.venv/
+env/
+__pycache__/
+*.pyc
+
+# Variables de entorno 
+.env
+
+# IDEs y editores
+.vscode/
+.idea/
+
+# Frontend (Node)
+node_modules/
+dist/
+.env.local
