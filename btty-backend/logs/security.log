@@ -1,20 +1,10 @@
+[2026-07-20 00:24:11] WARNING - [INSEGURO] LOGIN FALLIDO - Usuario: psicologo2@btty.com | Clave enviada: Password123!", | Intentos: 1 | IP: 127.0.0.1
+[2026-07-20 00:24:11] WARNING - [SEGURO] INTENTO FALLIDO - Usuario: psicologo2@btty.com | Clave enviada: Pass...[ENMASCARADO]...3!", | Intentos: 1 | IP: 127.0.0.1
+[2026-07-20 00:24:23] WARNING - [INSEGURO] LOGIN FALLIDO - Usuario: psicologo2@btty.com | Clave enviada: Password123!" | Intentos: 2 | IP: 127.0.0.1
+[2026-07-20 00:24:23] WARNING - [SEGURO] INTENTO FALLIDO - Usuario: psicologo2@btty.com | Clave enviada: Pass...[ENMASCARADO]...23!" | Intentos: 2 | IP: 127.0.0.1
+[2026-07-20 00:24:43] INFO - [INSEGURO] LOGIN EXITOSO - Usuario: psicologo2@btty.com | Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwc2ljb2xvZ28yQGJ0dHkuY29tIiwiZXhwIjoxNzg0NTI5NTgzLCJ0eXBlIjoiYWNjZXNzIn0.26iJDpyjTIR0ILvpysycK7KyJceIsha4VAWr3QCEFIQ | Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwc2ljb2xvZ28yQGJ0dHkuY29tIiwiZXhwIjoxNzg0NTI5NTgzLCJ0eXBlIjoiYWNjZXNzIn0.26iJDpyjTIR0ILvpysycK7KyJceIsha4VAWr3QCEFIQ; HttpOnly; Secure
+[2026-07-20 00:24:43] INFO - [SEGURO] LOGIN EXITOSO - Usuario: psicologo2@btty.com | Token: eyJh...[ENMASCARADO]...EFIQ | Cookie: access_token=eyJh...[ENMASCARADO]...EFIQ; HttpOnly; Secure
+[2026-07-20 00:29:46] INFO - [AUDITORÍA CAMBIO PERFIL] Usuario: psicologo2@btty.com | Campo: role_id | Valor Anterior: '2' | Valor Nuevo: '3' | IP: 127.0.0.1
 
-
-[2026-07-19 20:39:07] WARNING - LOGIN FALLIDO - Intento con correo: test@btty.com desde IP: 127.0.0.1
-[2026-07-19 20:39:26] INFO - LOGIN EXITOSO - Usuario: test@btty.com (ID: 1) desde IP: 127.0.0.1
-[2026-07-19 20:39:47] INFO - ACCESO RESTRINGIDO PERMITIDO - Usuario: test@btty.com accedió a /auth/protected-route desde IP: 127.0.0.1
-[2026-07-19 20:40:10] WARNING - ACCESO RESTRINGIDO DENEGADO - Intento sin token desde IP: 127.0.0.1 en ruta: /auth/protected-route
-[2026-07-19 20:40:56] INFO - LOGOUT EXITOSO - Usuario: test@btty.com desde IP: 127.0.0.1
-[2026-07-19 21:17:54] INFO - LOGIN EXITOSO - Usuario: test@btty.com (ID: 1) desde IP: 127.0.0.1
-[2026-07-19 21:18:00] WARNING - LOGIN FALLIDO - Intento con correo: test@btty.com desde IP: 127.0.0.1
-[2026-07-19 21:19:33] INFO - LOGIN EXITOSO - Usuario: test@btty.com (ID: 1) desde IP: 127.0.0.1
-[2026-07-19 21:22:09] WARNING - ACCESO RESTRINGIDO DENEGADO - Intento sin token desde IP: 127.0.0.1 en ruta: /auth/protected-route
-[2026-07-19 21:23:24] INFO - LOGIN EXITOSO - Usuario: test@btty.com (ID: 1) desde IP: 127.0.0.1
-[2026-07-19 21:23:31] INFO - ACCESO RESTRINGIDO PERMITIDO - Usuario: test@btty.com accedió a /auth/protected-route desde IP: 127.0.0.1
-[2026-07-19 21:24:07] INFO - LOGOUT EXITOSO - Usuario: test@btty.com desde IP: 127.0.0.1
-
-[2026-07-19 21:42:00] WARNING - INTENTO FALLIDO - Usuario: test1@btty.com | Motivo: Usuario no registrado | Intentos acumulados: 1 | IP: 127.0.0.1
-[2026-07-19 21:42:51] WARNING - INTENTO FALLIDO - Usuario: test@btty.com | Motivo: Contraseña incorrecta | Intentos acumulados: 1 | IP: 127.0.0.1
-[2026-07-19 21:44:17] WARNING - INTENTO FALLIDO - Usuario: test@btty.com | Motivo: Contraseña incorrecta | Intentos acumulados: 2 | IP: 127.0.0.1
-[2026-07-19 21:45:28] WARNING - INTENTO FALLIDO - Usuario: test@btty.com | Motivo: Contraseña incorrecta | Intentos acumulados: 3 | IP: 127.0.0.1
-[2026-07-19 21:46:16] INFO - LOGIN EXITOSO - Usuario: test@btty.com (ID: 1) | IP: 127.0.0.1
+[2026-07-20 01:22:44] INFO - LOGIN EXITOSO - Usuario: admin@btty.com (ID: 4) | Token: eyJh...[ENMASCARADO]...z2_w | IP: 127.0.0.1
+[2026-07-20 01:26:22] WARNING - LOGIN FALLIDO - Usuario: test@btty.com | Clave enviada: sdjn...[ENMASCARADO]...iofn | Intentos acumulados: 1 | IP: 127.0.0.1

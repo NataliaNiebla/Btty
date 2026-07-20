@@ -42,3 +42,16 @@ def decode_token(token: str, expected_type: str) -> dict:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="El token ha expirado.")
     except jwt.PyJWTError:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Token inválido o corrupto.")
+    
+# Función para enmascarar datos sensibles en los logs
+def sanitize_sensitive_data(value: str | None, show_chars: int = 4) -> str:
+    """ Enmascara valores sensibles como contraseñas, tokens o cookies para evitar su exposición en texto plano dentro de los archivos de log. """
+    if not value:
+        return "[VACÍO]"
+    # Si la cadena es muy corta, se oculta completamente para evitar exposición de datos sensibles
+    if len(value) <= show_chars * 2:
+        return "***[PROTEGIDO]***"
+    # Muestra los primeros y últimos N caracteres; enmascara el centro
+    start = value[:show_chars]
+    end = value[-show_chars:]
+    return f"{start}...[ENMASCARADO]...{end}"
