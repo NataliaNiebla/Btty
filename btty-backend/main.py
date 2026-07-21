@@ -2,7 +2,6 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import importlib
 from database import engine, Base # Importamos la conexión y la base
-
 from routers import auth
 
 # Importamos todos los modelos para que SQLAlchemy los reconozca.
@@ -23,16 +22,21 @@ for module_name in (
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
-    title="BTTY API",
-    description="Sistema de Gestión Clínica con IA para Psicólogos",
+    title="BTTY API Backend",
+    description="API para la gestión clínica con auditoría y seguridad activa",
     version="1.0.0"
 )
 
 # 2. Configuración de CORS (REQ-AUTH)
 # Permite que tu frontend en React (localhost:5173) se comunique con este backend
+origins = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # En producción cambia esto por la URL de tu app
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

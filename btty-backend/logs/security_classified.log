@@ -46,3 +46,20 @@
 2026-07-20 10:12:07 - [WARNING] - [ACCESO NO AUTORIZADO] Usuario: pacienteTestLogs@btty.com | Rol Actual: Paciente (ID: 3) | Roles Requeridos: ['Administrador'] | Ruta Solicitada: /auth/admin-dashboard | IP: 127.0.0.1
 2026-07-20 11:18:55 - [DEBUG] - Procesando intento de registro para: pacienteTestLogs@btty.com
 2026-07-20 11:18:55 - [ERROR] - ERROR DE REGISTRO - Correo ya registrado: pacienteTestLogs@btty.com
+2026-07-20 16:17:38 - [DEBUG] - Iniciando flujo de autenticación para usuario: pacienteTestLogs@btty.com desde IP: 127.0.0.1
+2026-07-20 16:17:39 - [INFO] - LOGIN EXITOSO - Usuario: pacienteTestLogs@btty.com (ID: 6) | Token: eyJh...[ENMASCARADO]...2UEI | Cookie: access_token=eyJh...[ENMASCARADO]...2UEI; HttpOnly; Secure | IP: 127.0.0.1
+2026-07-20 16:18:12 - [INFO] - [ACCESO PERMITIDO] Área de Pacientes accesada por: pacienteTestLogs@btty.com
+2026-07-20 16:18:16 - [WARNING] - [ACCESO NO AUTORIZADO] Usuario: pacienteTestLogs@btty.com | Rol Actual: Paciente (ID: 3) | Roles Requeridos: ['Administrador', 'Psicólogo'] | Ruta Solicitada: /auth/psychologist-dashboard | IP: 127.0.0.1
+2026-07-20 16:18:19 - [WARNING] - [ACCESO NO AUTORIZADO] Usuario: pacienteTestLogs@btty.com | Rol Actual: Paciente (ID: 3) | Roles Requeridos: ['Administrador'] | Ruta Solicitada: /auth/admin-dashboard | IP: 127.0.0.1
+2026-07-20 22:57:25 - [DEBUG] - Iniciando flujo de autenticación para usuario: pacienteTestLogs@btty.com desde IP: 127.0.0.1
+2026-07-20 22:57:26 - [INFO] - LOGIN EXITOSO - Usuario: pacienteTestLogs@btty.com (ID: 6) | Token: eyJh...[ENMASCARADO]...mf-A | Cookie: access_token=eyJh...[ENMASCARADO]...mf-A; HttpOnly; Secure | IP: 127.0.0.1
+
+
+2026-07-20 22:58:26 - [INFO] - [ACCESO PERMITIDO] Área de Pacientes accesada por: pacienteTestLogs@btty.com
+2026-07-20 22:58:29 - [WARNING] - [ACCESO NO AUTORIZADO] Usuario: pacienteTestLogs@btty.com | Rol Actual: Paciente (ID: 3) | Roles Requeridos: ['Administrador', 'Psicólogo'] | Ruta Solicitada: /auth/psychologist-dashboard | IP: 127.0.0.1
+2026-07-20 22:58:31 - [WARNING] - [ACCESO NO AUTORIZADO] Usuario: pacienteTestLogs@btty.com | Rol Actual: Paciente (ID: 3) | Roles Requeridos: ['Administrador'] | Ruta Solicitada: /auth/admin-dashboard | IP: 127.0.0.1
+2026-07-20 22:58:39 - [DEBUG] - Evaluando payload de actualización para: pacienteTestLogs@btty.com
+2026-07-20 22:58:39 - [INFO] - AUDITORÍA CAMBIO PERFIL - Usuario: pacienteTestLogs@btty.com | Campo: role_id | Valor Anterior: '3' | Valor Nuevo: '2' | IP: 127.0.0.1
+2026-07-20 22:58:46 - [INFO] - [ACCESO PERMITIDO] Área de Pacientes accesada por: pacienteTestLogs@btty.com
+2026-07-20 22:58:48 - [INFO] - [ACCESO PERMITIDO] Panel Clínico accesado por: pacienteTestLogs@btty.com
+2026-07-20 22:58:49 - [WARNING] - [ACCESO NO AUTORIZADO] Usuario: pacienteTestLogs@btty.com | Rol Actual: Psicólogo (ID: 2) | Roles Requeridos: ['Administrador'] | Ruta Solicitada: /auth/admin-dashboard | IP: 127.0.0.1
