@@ -63,3 +63,19 @@
 2026-07-20 22:58:46 - [INFO] - [ACCESO PERMITIDO] Área de Pacientes accesada por: pacienteTestLogs@btty.com
 2026-07-20 22:58:48 - [INFO] - [ACCESO PERMITIDO] Panel Clínico accesado por: pacienteTestLogs@btty.com
 2026-07-20 22:58:49 - [WARNING] - [ACCESO NO AUTORIZADO] Usuario: pacienteTestLogs@btty.com | Rol Actual: Psicólogo (ID: 2) | Roles Requeridos: ['Administrador'] | Ruta Solicitada: /auth/admin-dashboard | IP: 127.0.0.1
+
+2026-07-20 23:16:27 - [DEBUG] - Procesando intento de registro para: pacienteTest1@btty.com
+2026-07-20 23:16:28 - [INFO] - USUARIO REGISTRADO - ID: 7 | Email: pacienteTest1@btty.com
+
+2026-07-20 23:18:22 - [DEBUG] - Iniciando flujo de autenticación para usuario: pacienteTest1@btty.com desde IP: 127.0.0.1
+2026-07-20 23:18:23 - [WARNING] - LOGIN FALLIDO - Usuario: pacienteTest1@btty.com | Clave enviada: ***[PROTEGIDO]*** | Intentos acumulados: 1 | IP: 127.0.0.1
+2026-07-20 23:20:57 - [DEBUG] - Iniciando flujo de autenticación para usuario: pacienteTest1@btty.com desde IP: 127.0.0.1
+2026-07-20 23:20:58 - [INFO] - LOGIN EXITOSO - Usuario: pacienteTest1@btty.com (ID: 7) | Token: eyJh...[ENMASCARADO]...Z4YU | Cookie: access_token=eyJh...[ENMASCARADO]...Z4YU; HttpOnly; Secure | IP: 127.0.0.1
+2026-07-20 23:28:19 - [INFO] - LOGOUT EXITOSO - Usuario: pacienteTest1@btty.com desde IP: 127.0.0.1
+2026-07-20 23:28:58 - [DEBUG] - Iniciando flujo de autenticación para usuario: pacienteTest1@btty.com desde IP: 127.0.0.1
+2026-07-20 23:28:58 - [INFO] - LOGIN EXITOSO - Usuario: pacienteTest1@btty.com (ID: 7) | Token: eyJh...[ENMASCARADO]...Vgss | Cookie: access_token=eyJh...[ENMASCARADO]...Vgss; HttpOnly; Secure | IP: 127.0.0.1
+2026-07-20 23:31:41 - [DEBUG] - Evaluando payload de actualización para: pacienteTest1@btty.com
+2026-07-20 23:31:41 - [INFO] - AUDITORÍA CAMBIO PERFIL - Usuario: pacienteTest1@btty.com | Campo: role_id | Valor Anterior: '1' | Valor Nuevo: '3' | IP: 127.0.0.1
+2026-07-20 23:33:41 - [INFO] - [ACCESO PERMITIDO] Área de Pacientes accesada por: pacienteTest1@btty.com
+2026-07-20 23:34:57 - [WARNING] - [ACCESO NO AUTORIZADO] Usuario: pacienteTest1@btty.com | Rol Actual: Paciente (ID: 3) | Roles Requeridos: ['Administrador'] | Ruta Solicitada: /auth/admin-dashboard | IP: 127.0.0.1
+2026-07-20 23:36:40 - [INFO] - LOGOUT EXITOSO - Usuario: pacienteTest1@btty.com desde IP: 127.0.0.1

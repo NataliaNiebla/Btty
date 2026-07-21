@@ -65,12 +65,13 @@ export const styles = {
     backgroundColor: 'var(--brown-dark)',
     color: 'var(--text-tertiary)',
     border: 'none',
-    padding: '10px 18px',
-    borderRadius: 'var(--border-radius)',
-    fontSize: 'var(--text-medium)',
-    fontWeight: 'var(--text-weight-bold)',
+    padding: 'var(--padding-medium) var(--padding-large)',
+    borderRadius: 'var(--border-radius-small)',
+    fontSize: 'var(--text-small)',
+    fontWeight: 'var(--text-weight-regular)',
     cursor: 'pointer'
   },
+  
   gridContainer: {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',

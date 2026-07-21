@@ -73,11 +73,21 @@ function App() {
     }
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+  try {
+    const res = await fetch(`${API_URL}/auth/logout`, {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    const data = await res.json();
+    setResponseLog({ status: `🟢 HTTP ${res.status} Logout registrado`, data });
+  } catch (err) {
+    console.error(err);
+  } finally {
     setToken('');
     localStorage.removeItem('token');
-    setResponseLog({ status: '⚪ Sesión Cerrada', data: { message: 'Token eliminado' } });
-  };
+  }
+};
 
   return (
     <div style={styles.appContainer}>
